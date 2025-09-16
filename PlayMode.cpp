@@ -105,7 +105,7 @@ PlayMode::~PlayMode() {
 
 bool PlayMode::handle_event(SDL_Event const &evt, glm::uvec2 const &window_size) {
 
-	if (evt.type == SDL_EVENT_KEY_DOWN) {
+	if (evt.type == SDL_EVENT_KEY_DOWN && startWait > 6.0f) {
 		if (evt.key.key == SDLK_ESCAPE) {
 			SDL_SetWindowRelativeMouseMode(Mode::window, false);
 			return true;
@@ -176,6 +176,7 @@ void PlayMode::update(float elapsed) {
 	if (!musicStarted && (left.pressed ^ right.pressed) && startWait>5.0f) {
 		musicStarted = true;
 
+		Sound::stop_all_samples();
 		Spheres.reserve(3);
 		Squares.reserve(2);
 		Tetrahedrons.reserve(4);
