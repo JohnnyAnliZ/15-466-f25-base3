@@ -53,6 +53,7 @@ struct PlayMode : Mode {
 
 	bool musicStarted = false;
 	bool spacePressed = false;
+	float musicTime = 0.0f;
 
 	bool win = false;
 

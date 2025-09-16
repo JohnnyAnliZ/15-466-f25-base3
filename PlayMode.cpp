@@ -173,10 +173,11 @@ bool PlayMode::handle_event(SDL_Event const &evt, glm::uvec2 const &window_size)
 
 void PlayMode::update(float elapsed) {
 	startWait += elapsed;
+	if (musicStarted) musicTime += elapsed;
 
 	if (!musicStarted && (left.pressed ^ right.pressed) && startWait>5.0f) {
 		musicStarted = true;
-
+		
 		Sound::stop_all_samples();
 
 
@@ -199,6 +200,24 @@ void PlayMode::update(float elapsed) {
 
 		Drums = Sound::loop(*Drum_sample,0.0f,0.0f);
 	}
+
+	//win animation
+
+	if (win) {
+		//tetra
+		shapes[0]->rotation = glm::normalize(
+			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
+			* glm::angleAxis(std::sin(musicTime * 6.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+		//square
+		shapes[1]->rotation = glm::normalize(
+			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
+		*glm::angleAxis(std::sin(musicTime * 4.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+		//sphere
+		shapes[2]->rotation = glm::normalize(
+			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
+		*glm::angleAxis(std::sin(musicTime * 2.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+	}
+
 
 	//turn camera:
 	{
