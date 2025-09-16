@@ -207,15 +207,15 @@ void PlayMode::update(float elapsed) {
 		//tetra
 		shapes[0]->rotation = glm::normalize(
 			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
-			* glm::angleAxis(std::sin(musicTime * 6.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+			* glm::angleAxis(std::sin(glm::radians(musicTime * 540.0f)), glm::vec3(0.0f, 0.0f, 1.0f)));
 		//square
 		shapes[1]->rotation = glm::normalize(
 			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
-		*glm::angleAxis(std::sin(musicTime * 4.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+		*glm::angleAxis(std::sin(glm::radians(musicTime * 360.0f)), glm::vec3(0.0f, 0.0f, 1.0f)));
 		//sphere
 		shapes[2]->rotation = glm::normalize(
-			glm::quat(1.0f, 0.0f, 0.0f, 0.0f)
-		*glm::angleAxis(std::sin(musicTime * 2.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+			glm::quat(1.0f, 0.0f, 0.0f, 0.0f) *glm::angleAxis(std::sin(musicTime * 32.0f), glm::vec3(1.0f, 0.0f, 1.0f))
+		*glm::angleAxis(std::sin(musicTime * 32.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
 	}
 
 
