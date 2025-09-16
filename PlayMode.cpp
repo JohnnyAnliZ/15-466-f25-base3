@@ -92,6 +92,7 @@ PlayMode::PlayMode() : scene(*concert_scene) {
 	camera->transform->rotation = glm::quat(0.521f,0.478f,0.478f,0.521f);
 	baseRot = glm::quat(0.521f, 0.478f, 0.478f, 0.521f);
 
+	
 
 	//start music loop playing:
 	// (note: position will be over-ridden in update())
@@ -177,20 +178,24 @@ void PlayMode::update(float elapsed) {
 		musicStarted = true;
 
 		Sound::stop_all_samples();
-		Spheres.reserve(3);
-		Squares.reserve(2);
-		Tetrahedrons.reserve(4);
-		Spheres[0] = Sound::loop_3D(*Sphere0_sample,0.0f,shapes[2]->position, 10.0f);
-		Spheres[1] = Sound::loop_3D(*Sphere1_sample, 0.0f, shapes[2]->position, 10.0f);
-		Spheres[2] = Sound::loop_3D(*Sphere2_sample, 0.0f, shapes[2]->position, 10.0f);
 
-		Tetrahedrons[0] = Sound::loop_3D(*Tetra0_sample, 0.0f, shapes[0]->position, 10.0f);
-		Tetrahedrons[1] = Sound::loop_3D(*Tetra1_sample, 0.0f, shapes[0]->position, 10.0f);
-		Tetrahedrons[2] = Sound::loop_3D(*Tetra2_sample, 0.0f, shapes[0]->position, 10.0f);
-		Tetrahedrons[3] = Sound::loop_3D(*Tetra3_sample, 0.0f, shapes[0]->position, 10.0f);
 
-		Squares[0] = Sound::loop_3D(*Square0_sample, 0.0f, shapes[1]->position, 10.0f);
-		Squares[1] = Sound::loop_3D(*Square1_sample, 0.0f, shapes[1]->position, 10.0f);
+		Spheres.emplace_back(Sound::loop_3D(*Sphere0_sample, 0.0f, shapes[2]->position, 10.0f));
+		Spheres.emplace_back(Sound::loop_3D(*Sphere1_sample, 0.0f, shapes[2]->position, 10.0f));
+		Spheres.emplace_back(Sound::loop_3D(*Sphere2_sample, 0.0f, shapes[2]->position, 10.0f));
+
+
+
+		Tetrahedrons.emplace_back(Sound::loop_3D(*Tetra0_sample, 0.0f, shapes[0]->position, 10.0f));
+		Tetrahedrons.emplace_back(Sound::loop_3D(*Tetra1_sample, 0.0f, shapes[0]->position, 10.0f));
+		Tetrahedrons.emplace_back(Sound::loop_3D(*Tetra2_sample, 0.0f, shapes[0]->position, 10.0f));
+		Tetrahedrons.emplace_back(Sound::loop_3D(*Tetra3_sample, 0.0f, shapes[0]->position, 10.0f));
+
+
+
+		Squares.emplace_back(Sound::loop_3D(*Square0_sample, 0.0f, shapes[1]->position, 10.0f));
+		Squares.emplace_back(Sound::loop_3D(*Square1_sample, 0.0f, shapes[1]->position, 10.0f));
+		
 
 		Drums = Sound::loop(*Drum_sample,0.0f,0.0f);
 	}
